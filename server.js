@@ -20,6 +20,11 @@ app.use(bodyParser.json());
 //testing
 
 app.post('/add-user' , mongoosePractice.createProduct)
+
+
+app.get('/all-users', mongoosePractice.getProducts)
+app.get('/delete-user', mongoosePractice.deleteUser)
+
 // app.post('/products' , mongoosePractice.createProduct)
 
 // --------
@@ -35,8 +40,8 @@ app.post('/add-user' , mongoosePractice.createProduct)
 // 	res.send(server);
 // });
 
-app.get('/all-users', (req, res) => {
-	res.send(server);
-});
+// app.get('/all-users', (req, res) => {
+// 	res.send(server);
+// });
 
 app.listen(5000);
