@@ -18,9 +18,9 @@ const createProduct = async (req,res,next) => {
 
     })
     
-    console.log(createdProduct);
+    // console.log(createdProduct);
     const result = await createdProduct.save();
-    console.log('Result' , result);
+    // console.log('Result' , result);
 
     res.json(result);
 }
@@ -28,11 +28,12 @@ const createProduct = async (req,res,next) => {
 const getProducts = async (req,res,next) => {
     console.log('get product run');
     const products = await Product.find().exec();
-    console.log(products[1].id);
+    // console.log(products[1].id);
     res.json(products);
 }
 const deleteUser = async (req,res,next) => {
     console.log('delete product run');
+    console.log(req.body);
     const products = await Product.find().exec();
     let userToDelete = req.body.user.id
     const newList = products.filter(user => {

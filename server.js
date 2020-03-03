@@ -23,7 +23,7 @@ app.post('/add-user' , mongoosePractice.createProduct)
 
 
 app.get('/all-users', mongoosePractice.getProducts)
-app.get('/delete-user', mongoosePractice.deleteUser)
+app.delete('/delete-user', mongoosePractice.deleteUser)
 
 // app.post('/products' , mongoosePractice.createProduct)
 
