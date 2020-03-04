@@ -15,10 +15,14 @@ const createProduct = async (req,res,next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         dataUrl: req.body.dataUrl,
+        dob_year: req.body.dob_year,
+        dob_month: req.body.dob_month,
+        dob_day: req.body.dob_day,
+        email: req.body.email,
 
     })
     
-    // console.log(createdProduct);
+    console.log(createdProduct);
     const result = await createdProduct.save();
     // console.log('Result' , result);
 
@@ -33,12 +37,18 @@ const getProducts = async (req,res,next) => {
 }
 const deleteUser = async (req,res,next) => {
     console.log('delete product run');
-    console.log(req.body);
-    const products = await Product.find().exec();
-    let userToDelete = req.body.user.id
-    const newList = products.filter(user => {
-        user.id !== products[i].id
-    })
+    console.log(req.body.params);
+    let id = req.body.params;
+    const oldList = await Product.find().exec();
+    Product.deleteOne({_id: id}).exec();
+    const newList = await Product.find().exec();
+    // const newList = products.filter(user => {
+    //     return user.id !== id
+    // })
+    console.log(oldList.length);
+    // console.log(products.length);
+    console.log(newList.length);
+    
     res.json(newList);
 }
 
