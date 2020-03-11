@@ -2,13 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-const mongoosePractice = require('./mongoose')
-
+const mongoosePractice = require('./mongoose');
 
 const DUMMY_DATA = {
-	firstName : 'Jimmy',
-	lastName  : 'Oliva',
-	age       : 27
+	firstName: 'Jimmy',
+	lastName: 'Oliva',
+	age: 27
 };
 
 const server = [];
@@ -19,13 +18,12 @@ app.use(bodyParser.json());
 
 //testing
 
-app.post('/add-user' , mongoosePractice.createProduct)
+app.post('/add-user', mongoosePractice.addUser);
 
+app.get('/all-users', mongoosePractice.getUsers);
+app.post('/delete-user', mongoosePractice.deleteUser);
 
-app.get('/all-users', mongoosePractice.getProducts)
-app.post('/delete-user', mongoosePractice.deleteUser)
-
-// app.post('/products' , mongoosePractice.createProduct)
+// app.post('/Users' , mongoosePractice.addUser)
 
 // --------
 
