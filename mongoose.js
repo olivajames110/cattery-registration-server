@@ -18,15 +18,15 @@ const addUser = async (req, res, next) => {
 
 	const createdUser = new User({
 		// id: req.body.id,
-		visitType: req.body.visitType,
-		minors: req.body.minors,
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		dataUrl: req.body.dataUrl,
-		dob_year: req.body.dob_year,
-		dob_month: req.body.dob_month,
-		dob_day: req.body.dob_day,
-		email: req.body.email
+		visitType : req.body.visitType,
+		minors    : req.body.minors,
+		firstName : req.body.firstName,
+		lastName  : req.body.lastName,
+		dataUrl   : req.body.dataUrl,
+		dob_year  : req.body.dob_year,
+		dob_month : req.body.dob_month,
+		dob_day   : req.body.dob_day,
+		email     : req.body.email
 	});
 
 	console.log(createdUser);
@@ -41,6 +41,14 @@ const getUsers = async (req, res, next) => {
 	const Users = await User.find().exec();
 	// console.log(Users[1].id);
 	res.json(Users);
+};
+
+const getUser = async (req, res, next) => {
+	console.log('Single run');
+	let id = req.body.params;
+	const User = await User.find().exec();
+	// console.log(Users[1].id);
+	res.json(User);
 };
 const deleteUser = async (req, res, next) => {
 	console.log('delete User run');
@@ -61,4 +69,5 @@ const deleteUser = async (req, res, next) => {
 
 exports.deleteUser = deleteUser;
 exports.getUsers = getUsers;
+exports.getUser = getUsers;
 exports.addUser = addUser;

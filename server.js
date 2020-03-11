@@ -5,9 +5,9 @@ const cors = require('cors');
 const mongoosePractice = require('./mongoose');
 
 const DUMMY_DATA = {
-	firstName: 'Jimmy',
-	lastName: 'Oliva',
-	age: 27
+	firstName : 'Jimmy',
+	lastName  : 'Oliva',
+	age       : 27
 };
 
 const server = [];
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 
 app.post('/add-user', mongoosePractice.addUser);
 
+app.get('/get-user', mongoosePractice.getUser);
 app.get('/all-users', mongoosePractice.getUsers);
 app.post('/delete-user', mongoosePractice.deleteUser);
 
