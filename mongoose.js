@@ -44,11 +44,29 @@ const getUsers = async (req, res, next) => {
 };
 
 const getUser = async (req, res, next) => {
-	let id = req.body.params;
-	console.log('id: ', id);
+	let id = req.query.id;
+	console.log('req id: ', id);
 	const foundUser = await User.findOne({ _id: id }).exec();
 	console.log(foundUser);
 	res.json(foundUser);
+};
+
+const searchUser = async (req, res, next) => {
+	// let id = req.query.id;
+	console.log('SEARCH req.query: ', req.query.val);
+	const foundUser = await User.findOne({ firstName: req.query.val }).exec();
+	const allUsers = await User.find().exec();
+	let result;
+	console.log(foundUser);
+	console.log('LENGTH', foundUser.id.length);
+	if (foundUser.id.length > 1) {
+		// result = foundUser;
+		res.json(foundUser);
+	} else {
+		rres.json(allUsers);
+	}
+
+	// res.json(req.query.val);
 };
 
 const deleteUser = async (req, res, next) => {
@@ -71,4 +89,5 @@ const deleteUser = async (req, res, next) => {
 exports.deleteUser = deleteUser;
 exports.getUsers = getUsers;
 exports.getUser = getUser;
+exports.searchUser = searchUser;
 exports.addUser = addUser;
