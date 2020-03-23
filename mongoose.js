@@ -29,7 +29,7 @@ const addUser = async (req, res, next) => {
 		email: req.body.email
 	});
 
-	console.log(createdUser);
+	// console.log(createdUser);
 	const result = await createdUser.save();
 	// console.log('Result' , result);
 
@@ -45,33 +45,37 @@ const getUsers = async (req, res, next) => {
 
 const getUser = async (req, res, next) => {
 	let id = req.query.id;
-	console.log('req id: ', id);
+	// console.log('req id: ', id);
 	const foundUser = await User.findOne({ _id: id }).exec();
-	console.log(foundUser);
+	// console.log(foundUser);
 	res.json(foundUser);
 };
 
 const searchUser = async (req, res, next) => {
-	// let id = req.query.id;
-	console.log('SEARCH req.query: ', req.query.val);
-	const foundUser = await User.findOne({ firstName: req.query.val }).exec();
-	const allUsers = await User.find().exec();
 	let result;
-	console.log(foundUser);
-	console.log('LENGTH', foundUser.id.length);
-	if (foundUser.id.length > 1) {
-		// result = foundUser;
-		res.json(foundUser);
+	let val = req.query.val;
+	console.log('SEARCH req.query: ', val);
+	const allUsers = await User.find().exec();
+	// const foundUser = await User.findOne({ firstName: req.query.val }).exec();
+	let match = allUsers.filter(
+		(user) =>
+			user.firstName.toLowerCase() === val.toLowerCase() || user.lastName.toLowerCase() === val.toLowerCase()
+	);
+	console.log('match length', match.length);
+	// console.log('LENGTH', foundUser.id.length);
+	if (match.length === 1) {
+		console.log('match', match);
+		result = match[0];
 	} else {
-		rres.json(allUsers);
+		result = allUsers;
 	}
 
-	// res.json(req.query.val);
+	res.json(result);
 };
 
 const deleteUser = async (req, res, next) => {
 	console.log('delete User run');
-	console.log(req.body.params);
+	// console.log(req.body.params);
 	let id = req.body.params;
 	const oldList = await User.find().exec();
 	User.deleteOne({ _id: id }).exec();
